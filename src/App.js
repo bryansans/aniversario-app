@@ -1,4 +1,4 @@
-// Este es tu App.js actualizado con rutas de imagenes compatibles con GitHub Pages
+// App.js actualizado solo con rutas corregidas para GitHub Pages
 
 import React, { useState } from 'react';
 import './App.css';
@@ -9,7 +9,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 function App() {
   const [fecha, setFecha] = useState('');
   const [acceso, setAcceso] = useState(false);
-  const [vista, setVista] = useState('login');
+  const [vista, setVista] = useState('login'); // 'login', 'dashboard', 'historia', 'momentos'
 
   const fechaCorrecta = '2024-08-18';
 
@@ -30,7 +30,7 @@ function App() {
         customClass: {
           confirmButton: 'boton-alerta'
         },
-        buttonsStyling: false
+        buttonsStyling: false // importante para que use tus estilos
       });
     }
   };
@@ -74,6 +74,7 @@ function App() {
       {vista === 'mensaje' && acceso && (
         <MensajeFinal volver={() => setVista('dashboard')} />
       )}
+
     </div>
   );
 }
@@ -98,8 +99,16 @@ function Historia({ volver }) {
     <div className="historia fade-in">
       <h2>📖 Nuestra historia juntos</h2>
       <p className="historia-texto">
-        Y pensar que todo comenzo con un "among us black?" jaja...
+        Y pensar que todo comenzo con un "among us black?" jaja, y asi de la manera mas random nos conocimos,
+        solo nos hablabamos a traves de la cami ya que eramos solo conocidos, ya en algun momento que la cami nos dejo
+        solos comenzamos hablar y sin darnos cuenta conectabamos mucho y nos volvimos amigos. Ya al pasar el tiempo
+        pasaron cositas que al final nos separamos del resto hasta quedarnos nosotros solitos, y bueno nos conocimos
+        mas aun hasta que sentimos cositas el uno por el otro sin darnos cuenta, pero algo paso que perdimos conexion pero
+        luego volvimos a reencontrarnos y fue tan bonito haber comenzado hablar nuevamente y saber que no se habia perdido
+        esa conexion que teniamos y que aun nos queriamos mucho, y bueno como que conituamos eso que ya teniamos y llegamos
+        a lo inesperado, ser novios y comenzar una nueva etapa pero juntitos ❤️.
       </p>
+
       <img src={`${process.env.PUBLIC_URL}/pareja.png`} alt="nuestra historia" className="historia-imagen" />
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
@@ -107,20 +116,24 @@ function Historia({ volver }) {
 }
 
 function Momentos({ volver }) {
-  const momentos = Array.from({ length: 17 }, (_, i) => `${process.env.PUBLIC_URL}/foto${i + 1}.png`).concat(
-    `${process.env.PUBLIC_URL}/momentojuntos.mp4`
-  );
+  const momentos = [
+    'foto1.png', 'foto2.png', 'foto3.png', 'foto4.png', 'foto5.png', 'foto6.png', 'foto7.png',
+    'foto8.png', 'foto9.png', 'foto10.png', 'foto11.png', 'foto12.png', 'foto13.png', 'foto14.png',
+    'foto15.png', 'foto16.png', 'foto17.png', 'momentojuntos.mp4'
+  ].map(path => `${process.env.PUBLIC_URL}/${path}`);
 
   return (
     <div className="momentos fade-in">
       <h2>📸 Nuestros momentos juntitos</h2>
       <p>Alguno de nuestros momentos mami</p>
+
       <div className="carrusel">
         {momentos.map((src, i) => (
           <div key={i} className="slide">
             {src.endsWith('.mp4') ? (
               <video controls className="slide-video">
                 <source src={src} type="video/mp4" />
+                Tu navegador no soporta videos HTML5 😢
               </video>
             ) : (
               <img src={src} alt={`momento-${i}`} className="slide-img" />
@@ -128,18 +141,23 @@ function Momentos({ volver }) {
           </div>
         ))}
       </div>
+
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
   );
 }
 
 function Dibujos({ volver }) {
-  const dibujos = Array.from({ length: 8 }, (_, i) => `${process.env.PUBLIC_URL}/dibujo${i + 1}.png`);
+  const dibujos = [
+    'dibujo1.png', 'dibujo2.png', 'dibujo3.png', 'dibujo4.png',
+    'dibujo5.png', 'dibujo6.png', 'dibujo7.png', 'dibujo8.png'
+  ].map(path => `${process.env.PUBLIC_URL}/${path}`);
 
   return (
     <div className="dibujos fade-in">
       <h2>🎨 Dibujos especiales</h2>
       <p>Dibujitos que hice con el tiempo</p>
+
       <div className="carrusel">
         {dibujos.map((src, i) => (
           <div key={i} className="slide">
@@ -147,28 +165,29 @@ function Dibujos({ volver }) {
           </div>
         ))}
       </div>
+
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
   );
 }
 
 function MensajeFinal({ volver }) {
-  const mensajeCompleto = `Bueno mi morcita linda, esta página la hice con todo mi cariño para ti, pensando cada detalle y
-algunos de los tantos momentos que hemos compartido juntos.
-
-Nuestro primer año juntitos ha sido muy lindo, lleno de momentos good y algunos bad, pero siempre juntitos
-apoyándonos mutuamente. Este es el primero de muchos años que estaremos juntitos, mor mío.
-
-Si Dios quiere, el otro año nos veremos en persona y podremos compartir momentos inolvidables juntitos,
-momentos que recordaremos por siempre, morcita mía.
-
-Te amo tanto, mor mío. Eres el amor de mi vida y alma 💖`;
+  const mensajeCompleto =
+    "Bueno mi morcita linda, esta página la hice con todo mi cariño para ti, pensando cada detalle y\n" +
+    "algunos de los tantos momentos que hemos compartido juntos.\n\n" +
+    "Nuestro primer año juntitos ha sido muy lindo, lleno de momentos good y algunos bad, pero siempre juntitos\n" +
+    "apoyándonos mutuamente. Este es el primero de muchos años que estaremos juntitos, mor mío.\n\n" +
+    "Si Dios quiere, el otro año nos veremos en persona y podremos compartir momentos inolvidables juntitos,\n" +
+    "momentos que recordaremos por siempre, morcita mía.\n\n" +
+    "Te amo tanto, mor mío. Eres el amor de mi vida y alma 💖";
 
   return (
     <div className="mensaje-final fade-in">
       <h2>💌 Mi mensaje para ti</h2>
       <pre className="mensaje-texto">{mensajeCompleto}</pre>
+
       <img src={`${process.env.PUBLIC_URL}/final.gif`} alt="gif romántico" className="gif-final" />
+
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
   );
