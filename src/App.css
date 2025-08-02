@@ -1,38 +1,331 @@
-.App {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffe0e6, #f8bbd0);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.contenedor {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.login {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+}
+
+.login h2 {
+  color: #d81b60;
+  margin-bottom: 10px;
+}
+
+.login p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+input[type="date"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+button {
+  padding: 10px 24px;
+  background-color: #f06292;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ec407a;
+}
+
+/* Animación suave */
+.fade-in {
+  animation: aparecer 1.2s ease-in-out;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dashboard */
+.dashboard {
+  text-align: center;
+  padding: 20px;
+}
+
+.dashboard h2 {
+  color: #d81b60;
+  margin-bottom: 24px;
+}
+
+.tarjetas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tarjeta {
+  background: #ffe4ec;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.hover-anim:hover {
+  transform: scale(1.05);
+  background-color: #f8bbd0;
+}
+
+.historia {
+  max-width: 400px;
+  background: #fff0f6;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.historia h2 {
+  color: #d81b60;
+  margin-bottom: 16px;
+  margin-top: -90px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.historia-texto {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.historia-imagen {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 260px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.boton-volver {
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding: 10px 24px;
+  background-color: #f06292;
   color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+.momentos {
+  max-width: 450px;
+  background: #fff0f6;
+  padding: 30px 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.momentos h2 {
+  color: #d81b60;
+  margin-bottom: 20px;
+  margin-top: -90px;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.imagen-galeria {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.imagen-galeria:hover {
+  transform: scale(1.05);
+}
+
+/* Modal de imagen ampliada */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.imagen-modal {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+}
+
+.carrusel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.slide-img {
+  max-width: 90%;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  object-fit: contain;
+}
+
+.dibujos {
+  max-width: 450px;
+  background: #fff0f6;
+  padding: 30px 20px 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dibujos h2 {
+  color: #d81b60;
+  margin-bottom: 20px;
+  margin-top: -90px;
+}
+
+.galeria-dibujos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dibujo-img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.dibujo-img:hover {
+  transform: scale(1.05);
+}
+
+.mensaje-final {
+  max-width: 450px;
+  background: #fff0f6;
+  padding: 30px 20px 60px;
+  /* antes 40px → ahora más padding abajo */
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.mensaje-final h2 {
+  color: #d81b60;
+  margin-bottom: 20px;
+  margin-top: -90px;
+}
+
+.mensaje-texto {
+  white-space: pre-wrap;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gif-final {
+  margin-top: 20px;
+  max-width: 280px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: aparecer 1s ease-in-out;
+}
+
+.slide-video {
+  max-width: 90%;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.historia,
+.mensaje-final,
+.momentos,
+.dibujos {
+  max-width: 450px;
+  background: #fff0f6;
+  padding: 150px 20px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-height: 55vh;
+  overflow-y: auto;
 }
