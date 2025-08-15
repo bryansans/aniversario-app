@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aniversario-app/static/css/main.11318754.css",
-    "main.js": "/aniversario-app/static/js/main.4ce1e9b4.js",
+    "main.css": "/aniversario-app/static/css/main.b1105944.css",
+    "main.js": "/aniversario-app/static/js/main.28d2c07c.js",
     "static/js/453.f1e79de2.chunk.js": "/aniversario-app/static/js/453.f1e79de2.chunk.js",
     "index.html": "/aniversario-app/index.html",
-    "main.11318754.css.map": "/aniversario-app/static/css/main.11318754.css.map",
-    "main.4ce1e9b4.js.map": "/aniversario-app/static/js/main.4ce1e9b4.js.map",
+    "main.b1105944.css.map": "/aniversario-app/static/css/main.b1105944.css.map",
+    "main.28d2c07c.js.map": "/aniversario-app/static/js/main.28d2c07c.js.map",
     "453.f1e79de2.chunk.js.map": "/aniversario-app/static/js/453.f1e79de2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.11318754.css",
-    "static/js/main.4ce1e9b4.js"
+    "static/css/main.b1105944.css",
+    "static/js/main.28d2c07c.js"
   ]
 }
