@@ -329,3 +329,289 @@ button:hover {
   max-height: 55vh;
   overflow-y: auto;
 }
+
+/* Cada tarjeta/slide apila: media arriba, comentario abajo */
+.carrusel .slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;        /* Elimina márgenes extra */
+  padding: 0;       /* Elimina relleno extra */
+}
+
+.carrusel .media-momento {
+  margin: 0;
+  padding: 0;
+}
+
+/* Asegura que imagen/video se comporten como bloque */
+.slide-img,
+.slide-video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Comentario debajo y centrado */
+.comentario-momento {
+  margin-top: 10px;  /* Solo un pequeño espacio debajo de la imagen */
+  margin-bottom: 0; /* Evita espacio innecesario abajo */
+  text-align: center;
+}
+
+/* Pantalla completa */
+.regalo-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* Cielo nocturno */
+.night-sky {
+  position: absolute;
+  inset: 0;
+}
+
+.sky-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Contenido */
+.regalo-content {
+  position: relative;
+  width: min(920px, 94vw);
+  height: min(92vh, 800px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #ffeef6;
+  padding: 8px 10px;
+}
+
+.regalo-title {
+  margin: 6px 0 2px;
+  font-size: clamp(22px, 4vw, 30px);
+  color: #ffd6e6;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+}
+
+.regalo-sub {
+  margin: 0 0 6px;
+  font-size: clamp(13px, 2.6vw, 16px);
+  color: #ffe7f2;
+  opacity: .9;
+}
+
+/* Lienzo del ramo */
+.ramo-area-full {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  margin: 6px 0 10px;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Z-index */
+.tallo-css { z-index: 1; }
+.cono-rosa { z-index: 2; }
+.flor-css  { z-index: 3; }
+
+/* Flores */
+.flor-css {
+  --sz: 26px;
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0.7);
+  animation: brotar 650ms ease-out forwards;
+}
+
+@keyframes brotar {
+  from { transform: translate(-50%,-50%) scale(0.2); opacity: 0; }
+  to   { transform: translate(-50%,-50%) scale(1);   opacity: 1; }
+}
+
+.petalo.rosa {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 90%;
+  border-radius: 50% 50% 42% 42% / 60% 60% 40% 40%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  background: radial-gradient(60% 60% at 50% 30%,
+    hsl(var(--h) 85% 97%) 0%,
+    hsl(var(--h) 82% 88%) 38%,
+    hsl(var(--h) 75% 76%) 72%,
+    hsl(var(--h) 70% 62%) 100%);
+}
+
+.centro-rosa {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(60% 60% at 40% 40%, #ffe082, #ffca28 55%, #f9a825 100%);
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.18), 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* Cono */
+.cono-rosa {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 95px solid transparent;
+  border-right: 95px solid transparent;
+  border-top: 190px solid rgba(255, 190, 210, 0.95);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.28));
+}
+
+/* Botón Volver en regalo */
+.regalo-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* ===== Menú mosaico dinámico ===== */
+.mosaic-menu { padding-top: 6px; }
+.mosaic-menu .menu-sub { margin-top: 6px; margin-bottom: 14px; color:#5b5b5b; }
+
+/* Grid en 2 columnas; la tarjeta .hero ocupa dos */
+.mosaic{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.mosaic-card{
+  position:relative;
+  display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start;
+  min-height:118px;
+  padding:14px;
+  border-radius:16px;
+  border:2px solid transparent;
+  background:
+    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) padding-box,
+    conic-gradient(from 210deg, #ff9cc7, #ffd6e8, #ff9cc7) border-box;
+  box-shadow: 0 12px 24px rgba(0,0,0,.12);
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  isolation:isolate;
+}
+
+/* Fondo con blobs suaves y brillo que cruza */
+.mosaic-card::before{
+  content:"";
+  position:absolute; inset:-20% -10% auto -10%; height:70%;
+  background:
+    radial-gradient(60% 60% at 20% 30%, rgba(255,255,255,.6) 0%, transparent 60%),
+    radial-gradient(60% 60% at 85% 10%, rgba(255,180,210,.55) 0%, transparent 60%),
+    radial-gradient(60% 60% at 70% 80%, rgba(255,160,200,.45) 0%, transparent 60%);
+  filter: blur(6px);
+  z-index:-1;
+}
+.mosaic-card::after{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit; z-index:-1;
+  background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.55) 50%, transparent 55%);
+  transform: translateX(-120%);
+  animation: sheenMosaic 3s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+@keyframes sheenMosaic{ 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+
+.mosaic-card:hover{ transform: translateY(-2px) rotate(-.2deg); box-shadow:0 16px 28px rgba(0,0,0,.16); }
+.mosaic-card:active{ transform: scale(.985); }
+
+/* Contenido */
+.mc-emoji{ font-size:1.5rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.12)); }
+.mc-title{ font-weight:800; font-size:1.05rem; margin-top:6px;  color: #f079a0;}
+.mc-sub{ font-size:.9rem; color:#666; text-align: left; }
+
+/* Tarjeta héroe: más alta y a 2 columnas */
+.mosaic-card.hero{
+  grid-column: 1 / -1;
+  min-height: 150px;
+}
+/* Opcional: darle un tinte diferente a la hero */
+.mosaic-card.hero::before{
+  background:
+    radial-gradient(60% 60% at 20% 30%, rgba(255,255,255,.7) 0%, transparent 60%),
+    radial-gradient(60% 60% at 85% 10%, rgba(255,170,220,.65) 0%, transparent 60%),
+    radial-gradient(60% 60% at 70% 80%, rgba(255,140,200,.55) 0%, transparent 60%);
+}
+
+/* Un poquito más alto en pantallas mayores */
+@media (min-width:420px){
+  .mosaic-card{ min-height:128px; }
+  .mosaic-card.hero{ min-height:168px; }
+}
+
+/* Fondo con imagen en el propio cuadrito (con borde degradado y velo para legibilidad) */
+.mosaic-card{
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+  gap: 6px;
+  min-height: 118px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  /* 1) velo oscuro (arriba)  2) imagen  3) borde degradado */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,.22) 45%, rgba(0,0,0,.08) 100%) padding-box,
+    var(--img) center/cover no-repeat padding-box,
+    conic-gradient(from 210deg, #ff9cc7, #ffd6e8, #ff9cc7) border-box;
+  box-shadow: 0 12px 24px rgba(0,0,0,.12);
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.45);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+  isolation: isolate;
+}
+.mosaic-card:hover{ transform: translateY(-2px) rotate(-.2deg); box-shadow: 0 16px 28px rgba(0,0,0,.16); }
+.mosaic-card:active{ transform: scale(.985); }
+
+/* brillo que cruza */
+.mosaic-card::after{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit;
+  background: linear-gradient(120deg, transparent 45%, rgba(255,255,255,.55) 50%, transparent 55%);
+  transform: translateX(-120%);
+  animation: sheenMosaic 3s ease-in-out infinite;
+  mix-blend-mode: screen; pointer-events:none;
+}
+@keyframes sheenMosaic{ 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+
+/* Tipografía sobre imagen */
+.mc-emoji{ font-size:1.3rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+.mc-title{ font-weight:800; font-size:1.05rem; }
+.mc-sub{ font-size:.92rem; color: rgba(255,255,255,.92); }
+
+/* La “hero” ocupa dos columnas y es más alta */
+.mosaic-card.hero{ grid-column: 1 / -1; min-height: 150px; }
+
+/* Opcional: si la imagen se ve muy oscura/clara, ajusta el velo:
+   cambia los rgba del linear-gradient de .mosaic-card (primer fondo) */
