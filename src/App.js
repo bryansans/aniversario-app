@@ -38,15 +38,31 @@ function App() {
   return (
     <div className="contenedor">
       {vista === 'login' && (
-        <div className="login fade-in">
-          <h2>💖 ¿Recuerdas nuestra fecha especial?</h2>
-          <p>Elige el día que comenzó todo 💘</p>
-          <input
-            type="date"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
-          />
-          <button onClick={verificarFecha}>Desbloquear</button>
+        <div className="login login-card fade-in">
+          <div className="bg-hearts" aria-hidden="true" />
+          <div className="login-badge">💖 Aniversario</div>
+
+          <h2 className="title-login">
+            Ingresa nuestra fecha especial
+          </h2>
+
+          <p className="subtitle-login">
+            Si no te acuerdas te dare una nalgada<span className="twinkle">👋</span>
+          </p>
+
+          <div className="login-input">
+            <input
+              type="date"
+              value={fecha}
+              onChange={(e) => setFecha(e.target.value)}
+            />
+          </div>
+
+          <button className="btn-cta" onClick={verificarFecha}>
+            <span>Desbloquear</span>
+          </button>
+
+          <small className="login-hint">Formato recomendado: dd-mm-aaaa</small>
         </div>
       )}
 
@@ -87,8 +103,17 @@ function App() {
 function Dashboard({ irAHistoria, irAMomentos, irADibujos, irAMensaje, irARegalo }) {
   return (
     <div className="dashboard fade-in mosaic-menu">
-      <h2>Bienvenida corazón mio ❤️</h2>
-      <p className="menu-sub">Puedes ir viendo cada tarjetita que te prepare mami linda 💕</p>
+
+      <h2 className="title-hero">
+        <span className="sparkle">✨</span>
+        Bienvenida corazón mio
+        <span className="heart">💗</span>
+      </h2>
+
+      <p className="subtitle-hero">
+        Puedes ir viendo cada tarjetita que te preparé mami linda
+        <span className="twinkle">💕</span>
+      </p>
 
       <div className="mosaic">
         <button type="button" className="mosaic-card" onClick={irAHistoria}
