@@ -1,11 +1,103 @@
 // App.js actualizado solo con rutas corregidas para GitHub Pages + sección "Regalo"
+// + Botón de música de fondo con toggle
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+import RegaloFlores from './RegaloFlores';
+
+/* =================== MUSIC TOGGLE =================== */
+function MusicToggle({ src, initialVolume = 0.35, className = "" }) {
+  const audioRef = useRef(null);
+  const [on, setOn] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("bgMusicEnabled") === "true";
+  });
+
+  // Config inicial
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.volume = initialVolume;
+
+    if (on) {
+      audio.play().catch(() => {
+        setOn(false);
+        localStorage.setItem("bgMusicEnabled", "false");
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Reacciona a cambios de on/off
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (on) {
+      audio.play().catch(() => setOn(false));
+    } else {
+      audio.pause();
+    }
+    localStorage.setItem("bgMusicEnabled", String(on));
+  }, [on]);
+
+  const iconOn = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5L6 9H3v6h3l5 4V5z" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+    </svg>
+  );
+
+  const iconOff = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 5L6 9H3v6h3l5 4V5z" />
+      <path d="M23 9l-6 6" />
+      <path d="M17 9l6 6" />
+    </svg>
+  );
+
+  return (
+    <>
+      <audio ref={audioRef} src={src} />
+      <button
+        onClick={() => setOn(v => !v)}
+        aria-label={on ? "Silenciar música" : "Activar música"}
+        title={on ? "Silenciar música" : "Activar música"}
+        className={className}
+        style={{
+          position: 'fixed',
+          right: 16,
+          bottom: 16,
+          zIndex: 9999,
+          padding: 12,
+          borderRadius: 9999,
+          background: '#f06292',
+          backdropFilter: 'blur(6px)',
+          border: '1px solid rgba(0,0,0,.06)',
+          boxShadow: '0 6px 20px rgba(0,0,0,.12)',
+          transform: 'translateZ(0)',
+          marginBottom: 'env(safe-area-inset-bottom)',
+          marginRight: 'env(safe-area-inset-right)',
+          cursor: 'pointer'
+        }}
+      >
+        {on ? iconOn : iconOff}
+      </button>
+    </>
+  );
+}
+
+/* =================== APP =================== */
 function App() {
   const [fecha, setFecha] = useState('');
   const [acceso, setAcceso] = useState(false);
@@ -93,8 +185,11 @@ function App() {
       )}
 
       {vista === 'regalo' && acceso && (
-        <Regalo volver={() => setVista('dashboard')} />
+        <RegaloFlores volver={() => setVista('dashboard')} />
       )}
+
+      {/* Botón flotante de música (siempre visible) */}
+      <MusicToggle src={`${process.env.PUBLIC_URL}/audio/musica.mp3`} initialVolume={0.35} />
     </div>
   );
 }
@@ -356,10 +451,11 @@ function Regalo({ volver }) {
     const canvas = document.querySelector('.sky-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let rafId;
+
+    let rafId = 0;                 // ✅ se declara una sola vez
     let last = performance.now();
 
-    const METEOR_RATE = 2.0; // meteoro/s aprox. (ajusta para más/menos)
+    const METEOR_RATE = 2.0; // meteoro/s aprox.
 
     // --- Resize con DPR para nitidez ---
     const resize = () => {
@@ -389,12 +485,10 @@ function Regalo({ volver }) {
       const w = window.innerWidth;
       const h = window.innerHeight;
 
-      // Empieza arriba o a la izquierda para trayecto diagonal ↘
       const fromTop = Math.random() < 0.6;
       const startX = fromTop ? Math.random() * w * 0.7 : -20;
       const startY = fromTop ? -20 : Math.random() * h * 0.4;
 
-      // Ángulo 25°–35° hacia abajo/derecha
       const ang = (25 + Math.random() * 10) * (Math.PI / 180);
       const speed = 400 + Math.random() * 300; // px/s
       const vx = Math.cos(ang) * speed;
@@ -403,19 +497,19 @@ function Regalo({ volver }) {
       meteors.push({
         x: startX, y: startY,
         vx, vy,
-        len: 120 + Math.random() * 100,   // largo de cola
-        life: 900 + Math.random() * 800,  // ms de vida
+        len: 120 + Math.random() * 100,
+        life: 900 + Math.random() * 800,
         age: 0
       });
     };
 
     const draw = (t) => {
-      const dt = Math.min((t - last) / 1000, 0.05); // clamp para picos
+      const dt = Math.min((t - last) / 1000, 0.05);
       last = t;
 
       const w = window.innerWidth, h = window.innerHeight;
 
-      // Fondo nocturno
+      // Fondo
       const grd = ctx.createRadialGradient(
         w / 2, -200, 200,
         w / 2, h / 2, Math.max(w, h)
@@ -441,25 +535,22 @@ function Regalo({ volver }) {
       // Spawner de meteoros
       if (Math.random() < METEOR_RATE * dt) spawnMeteor();
 
-      // Actualiza/dibuja meteoros
+      // Dibujo de meteoros
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.x += m.vx * dt;
         m.y += m.vy * dt;
         m.age += dt * 1000;
 
-        // Vector unitario para la cola
         const mag = Math.hypot(m.vx, m.vy);
         const ux = m.vx / mag;
         const uy = m.vy / mag;
         const tailX = m.x - ux * m.len;
         const tailY = m.y - uy * m.len;
 
-        // Opacidad por vida
         const lifeK = 1 - m.age / m.life; // 1->0
         const alpha = Math.max(lifeK, 0) * 0.9;
 
-        // Cola con gradiente
         const g = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
         g.addColorStop(0, `rgba(255,255,255,${alpha})`);
         g.addColorStop(1, `rgba(255,255,255,0)`);
@@ -470,7 +561,6 @@ function Regalo({ volver }) {
         ctx.lineTo(tailX, tailY);
         ctx.stroke();
 
-        // Cabeza brillante
         ctx.save();
         ctx.shadowColor = `rgba(255,255,255,${alpha})`;
         ctx.shadowBlur = 12;
@@ -480,16 +570,18 @@ function Regalo({ volver }) {
         ctx.fill();
         ctx.restore();
 
-        // Remover si termina
         if (m.age > m.life || m.x > w + 60 || m.y > h + 60) {
           meteors.splice(i, 1);
         }
       }
 
+      // ✅ guarda SIEMPRE el último id para poder cancelarlo
       rafId = requestAnimationFrame(draw);
     };
 
+    // primer frame
     rafId = requestAnimationFrame(draw);
+
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('resize', resize);
@@ -527,7 +619,7 @@ function Regalo({ volver }) {
                 width: `${f.size * 2.2}px`,
                 height: `${f.size * 2.2}px`,
                 '--h': f.hue,
-                '--sz': `${f.size}px`,          // tamaño base para pétalos
+                '--sz': `${f.size}px`,
                 animationDelay: `${f.delay}s`
               }}
             >
