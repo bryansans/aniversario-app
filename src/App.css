@@ -869,3 +869,279 @@ button:hover {
   margin-right: 18px;
 }
 
+/* ====== HISTORIA (estilo mejorado) ====== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.historia {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 80px 16px 150px;
+  position: relative;
+}
+
+.historia-header {
+  text-align: center;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.historia-icon {
+  display: inline-block;
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.historia-title {
+  margin: 0;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: clamp(1.8rem, 4.6vw, 3rem);
+  color: #d81b60; /* fallback si no soporta el gradiente */
+  background: linear-gradient(90deg, #ff6aa2, #b43fe0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 18px rgba(180, 63, 224, 0.15);
+}
+
+.historia-title em {
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: #ff6aa2; /* por si no aplica el gradiente */
+  text-shadow: 0 0 12px rgba(255, 106, 162, .35);
+}
+
+.historia-subtitle {
+  margin: 8px auto 0;
+  max-width: 640px;
+  color: #6b2b47;
+  opacity: .9;
+  font-size: 0.98rem;
+}
+
+.historia-underline {
+  display: block;
+  height: 6px;
+  width: 180px;
+  margin: 14px auto 0;
+  border-radius: 999px;
+  background: radial-gradient(80% 120% at 50% 50%, #ff8ec0, #e26bd1 60%, transparent 70%);
+  filter: blur(0.6px);
+}
+
+/* Tarjeta del texto (glass) */
+.historia-card {
+  margin: 18px auto 22px;
+  padding: 20px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 14px 40px rgba(216, 27, 96, 0.12);
+}
+
+/* Párrafo con capitular bonita */
+.historia-texto {
+  color: #4a2040;
+  line-height: 1.85;
+  font-size: 1rem;
+  text-wrap: pretty;
+}
+
+.historia-texto::first-letter {
+  float: left;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  line-height: 0.9;
+  padding: 6px 8px 0 0;
+  color: #d81b60;
+  text-shadow: 0 1px 10px rgba(216, 27, 96, 0.2);
+}
+
+/* Imagen enmarcada */
+.historia-figure {
+  margin: 0 auto 18px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.historia-imagen {
+  width: min(820px, 92%);
+  border-radius: 18px;
+  box-shadow:
+    0 8px 26px rgba(216, 27, 96, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.9) inset;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .historia-card { padding: 16px 14px; }
+  .historia-texto { font-size: 0.98rem; }
+}
+
+/* ====== MOMENTOS – estilo de comentarios ====== */
+.momentos .slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.momentos .media-momento {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(216, 27, 96, 0.12);
+}
+
+.momentos .slide-img,
+.momentos .slide-video {
+  display: block;
+  max-width: min(880px, 92vw);
+  width: 100%;
+  height: auto;
+}
+
+/* Burbuja bajo la foto */
+.comentario-momento {
+  position: relative;
+  margin: 10px 0 22px;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 8px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  color: #4a2040;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 92%;
+  box-shadow: 0 10px 24px rgba(216, 27, 96, 0.12);
+  animation: cmt-pop .35s ease both;
+}
+
+/* colita de la burbuja */
+.comentario-momento::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  bottom: -8px;
+  width: 14px;
+  height: 14px;
+  background: inherit;
+  border-left: 1px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  border-radius: 0 0 0 4px;
+  filter: blur(.1px);
+}
+
+/* iconito */
+.comentario-momento::before {
+  content: "💞";
+  margin-right: 8px;
+  font-size: 1.05em;
+  vertical-align: -2px;
+  opacity: .9;
+}
+
+/* animación de entrada */
+@keyframes cmt-pop {
+  from { transform: translateY(8px) scale(.98); opacity: 0; }
+  to   { transform: translateY(0)   scale(1);    opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 600px){
+  .comentario-momento{
+    font-size: 1.02rem;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+  }
+}
+
+/* ====== DIBUJOS – header reutiliza estilos de "Historia" ====== */
+/* (ya los tienes: .historia-header, .historia-title, .historia-subtitle, .historia-underline) */
+
+/* ====== DIBUJOS – chip sobre la imagen ====== */
+.dibujos .slide {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.dibujos .media-dibujo {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 12px 30px rgba(216, 27, 96, 0.12);
+}
+
+.dibujos .slide-img {
+  display: block;
+  width: min(880px, 92vw);
+  height: auto;
+}
+
+/* Chip base: abajo-izquierda (igual que en Momentos, con su propio scope) */
+.dibujos .comentario-chip{
+  position:absolute;
+  left:12px; bottom:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.9);
+  backdrop-filter: blur(6px);
+  font-weight:700;
+  color:#6b2b47;
+  font-size:.94rem;
+  box-shadow: 0 6px 18px rgba(216,27,96,.12);
+  animation: chip-pop .3s ease both;
+}
+.dibujos .comentario-chip::before{ content:"🖌️"; margin-right:6px; }
+
+/* Animación (reutilizada) */
+@keyframes chip-pop {
+  from { transform: translateY(6px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+@media (max-width: 600px){
+  .dibujos .comentario-chip{
+    font-size: .98rem;
+    left:10px; bottom:10px;
+    padding:6px 10px;
+  }
+}
+
+/* Capitular SOLO en el primer párrafo de la tarjeta */
+.historia-card .historia-texto:first-of-type::first-letter {
+  float: left;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  line-height: 0.9;
+  padding: 6px 8px 0 0;
+  color: #d81b60;
+  text-shadow: 0 1px 10px rgba(216, 27, 96, 0.2);
+}
+
+/* El GIF con el mismo marco que las imágenes de Historia */
+.gif-final {
+  width: min(820px, 92%);
+  border-radius: 18px;
+  box-shadow:
+    0 8px 26px rgba(216, 27, 96, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.9) inset;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  display: block;
+}
+
+/* Subir el botón ← Volver en la sección de flores */
+.regalo-flowers .rf-actions{
+  bottom: 30px !important;              /* súbelo ~70px */
+}

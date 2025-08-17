@@ -112,7 +112,7 @@ function App() {
     } else {
       Swal.fire({
         title: 'Como!!',
-        text: 'Te voy hacer mierdita si no te acuerdas',
+        text: 'Te dare una paliza',
         imageUrl: `${process.env.PUBLIC_URL}/error-amor.png`,
         imageWidth: 200,
         imageAlt: 'Error con amor',
@@ -139,7 +139,7 @@ function App() {
           </h2>
 
           <p className="subtitle-login">
-            Si no te acuerdas te dare una nalgada<span className="twinkle">👋</span>
+            Si no te acuerdas te hare mierdita<span className="twinkle">👊</span>
           </p>
 
           <div className="login-input">
@@ -154,7 +154,7 @@ function App() {
             <span>Desbloquear</span>
           </button>
 
-          <small className="login-hint">Formato recomendado: dd-mm-aaaa</small>
+          <small className="login-hint">Presiona el icono y sube el volumen 🎶</small>
         </div>
       )}
 
@@ -257,19 +257,69 @@ function Dashboard({ irAHistoria, irAMomentos, irADibujos, irAMensaje, irARegalo
 function Historia({ volver }) {
   return (
     <div className="historia fade-in">
-      <h2>📖 Nuestra historia juntos</h2>
-      <p className="historia-texto">
-        Y pensar que todo comenzo con un "among us black?" jaja, y asi de la manera mas random nos conocimos,
-        solo nos hablabamos a traves de la cami ya que eramos solo conocidos, ya en algun momento que la cami nos dejo
-        solos comenzamos hablar y sin darnos cuenta conectabamos mucho y nos volvimos amigos. Ya al pasar el tiempo
-        pasaron cositas que al final nos separamos del resto hasta quedarnos nosotros solitos, y bueno nos conocimos
-        mas aun hasta que sentimos cositas el uno por el otro sin darnos cuenta, pero algo paso que perdimos conexion pero
-        luego volvimos a reencontrarnos y fue tan bonito haber comenzado hablar nuevamente y saber que no se habia perdido
-        esa conexion que teniamos y que aun nos queriamos mucho, y bueno como que conituamos eso que ya teniamos y llegamos
-        a lo inesperado, ser novios y comenzar una nueva etapa pero juntitos ❤️.
-      </p>
+      <header className="historia-header">
+        <span className="historia-icon"></span>
+        <h2 className="historia-title">
+          <span>Nuestra historia</span> <em>juntos</em>
+        </h2>
+        <p className="historia-subtitle">
+          Un pequeño recorrido por cómo empezó todo
+        </p>
+        <i className="historia-underline" aria-hidden="true" />
+      </header>
 
-      <img src={`${process.env.PUBLIC_URL}/pareja.png`} alt="nuestra historia" className="historia-imagen" />
+      <div className="historia-card">
+        <p className="historia-texto">
+          Y pensar que todo comenzó con un “among us black?” jaja; así, de la
+          manera más random, nos conocimos. Solo nos hablábamos a través de la
+          Cami porque éramos solo conocidos, hasta nos caiamos mal jajaja. 
+          En un momento en que la Cami nos dejó solos, de la nada comenzamos a hablar y, 
+          sin darnos cuenta nos fuimos volviendo amigos ya que compartíamos muchas cosas en común.
+        </p>
+
+        <p className="historia-texto">
+          Con el tiempo pasaron cositas entre tu y la cami que hizo que nos separemos un poco 
+          hasta el momento que ya se pelearon y se dejaron de hablar por un largo tiempo.
+          Y bueno yo me fui contigo ya que al final justos la pasabamos muy bien tranquilos sin que 
+          nos molesten y era muy divertido jugar juntos. Pasamos tanto tiempo juntos que nos 
+          conocimos y conectamos muchisimo mas hasta sin darnos cuenta haciamos cositas de pareja 
+          o decirnos cositas lindas y eso que eramos bien amigos nomas.
+        </p>
+
+        <p className="historia-texto">
+          Bueno despues de un tiempo juntos, por culpa de un tercero acabamos perdiendo la 
+          conexion y dejamos de hablar por un largo timpo. Despues de ese largo tiempo, 
+          la Cami me hablo para volver a jugar y bueno volvimos a jugar como antes y para mi sorpresa 
+          me dijo que hablaba contigo, bueno gracias a la Cami volvimos a reencontrarnos y charlar 
+          de todo lo que paso y de lo que hemos hecho. Y bueno con cada charla que haciamos 
+          vi que no se perdio ni una pizca de esa conexion que teniamos antes y seguimos hablando mucho 
+          tiempo hasta bien de noche como si estuvieramos recuperando todo ese tiempo que no hablamos.
+        </p>
+
+        <p className="historia-texto">
+          Y así, mientras pasaba el tiempo sin darme cuenta me volvi mas cariñoso contigo (bueno peleabamos pero con love jajaja), tratandote 
+          diferente al resto de los chicos, si hasta ellos lo decian que eramos muy unidos. Volvimos a compartir
+          tantos momentos charlando, jugando, mirando cositas juntos y sin darme cuenta me fui enamorando de ti. 
+          Luego vino los retos juasjuas, y pensar que eso dio inicio para que salgaramos jaja. Despues vino la web que 
+          hicimos con los chicos y como era primera vez que te veia de frente me enamoraste mas aun. Y luego paso el tan esperado 
+          ChupiWeb jiji, donde en principio mi apuesta era declararme pero termino siendo verdad y nos empezamos a decir las cositas y me 
+          sorprendio tanto que sentias lo mismo por mi, me hizo muy feliz.
+        </p>
+
+        <p className="historia-texto">
+          Y bueno despues de todo lo que hemos pasado de ser conocidos, odiados, amigos, muy amigos hasta ahora actualmente siendo novios.
+          Quien lo iba a pensar y no nos tenian fe los masisis jajaja. Asi comenzamos nuestra nueva etapa pero juntitos mor mio ❤️.
+        </p>
+      </div>
+
+      <figure className="historia-figure">
+        <img
+          src={`${process.env.PUBLIC_URL}/pareja.png`}
+          alt="nuestra historia"
+          className="historia-imagen"
+        />
+      </figure>
+
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
   );
@@ -312,8 +362,17 @@ function Momentos({ volver }) {
 
   return (
     <div className="momentos fade-in">
-      <h2>📸 Nuestros momentos juntitos</h2>
-      <p>Algunas cositas de lo que hemos hecho mami 💖</p>
+      {/* Header con el mismo estilo de "Historia" */}
+      <header className="historia-header">
+        <span className="historia-icon"></span>
+        <h2 className="historia-title">
+          <span>Nuestros momentos</span> <em>juntitos</em>
+        </h2>
+        <p className="historia-subtitle">
+          Algunas cositas de lo que hemos hecho mami 💖
+        </p>
+        <i className="historia-underline" aria-hidden="true" />
+      </header>
 
       <div className="carrusel">
         {momentos.map((item, i) => (
@@ -345,21 +404,44 @@ function Momentos({ volver }) {
 // =================== DIBUJOS ===================
 
 function Dibujos({ volver }) {
-  const dibujos = [
+  // Archivos (como tenías)
+  const files = [
     'dibujo1.png', 'dibujo2.png', 'dibujo3.png', 'dibujo4.png',
     'dibujo5.png', 'dibujo6.png', 'dibujo7.png', 'dibujo8.png',
-    'dibujo9.png',
-  ].map(path => `${process.env.PUBLIC_URL}/${path}`);
+    'dibujo9.png', 'dibujo10.png', 'dibujo11.png', 'dibujo12.png',
+  ];
+
+  // (Opcional) Puedes poner textos para cada dibujo aquí; si no hay, mostrará "Dibujo #"
+  const captions = [
+    /* 'Retrato', 'Boceto 2', 'Caricatura', ... */
+  ];
+
+  // Construimos objetos {src, comentario}
+  const dibujos = files.map((name, i) => ({
+    src: `${process.env.PUBLIC_URL}/${name}`,
+    comentario: captions[i] || `Dibujo ${i + 1}`,
+  }));
 
   return (
     <div className="dibujos fade-in">
-      <h2>🎨 Dibujos especiales</h2>
-      <p>Dibujitos que hice con el tiempo</p>
+      {/* Header con el mismo estilo que "Historia" */}
+      <header className="historia-header">
+        
+        <h2 className="historia-title">
+          <span>Dibujos</span> <em>especiales</em>
+        </h2>
+        <p className="historia-subtitle">Dibujitos nuestros</p>
+        <i className="historia-underline" aria-hidden="true" />
+      </header>
 
       <div className="carrusel">
-        {dibujos.map((src, i) => (
+        {dibujos.map((item, i) => (
           <div key={i} className="slide">
-            <img src={src} alt={`dibujo-${i}`} className="slide-img" />
+            <div className="media-dibujo">
+              <img src={item.src} alt={`dibujo-${i}`} className="slide-img" />
+              {/* CHIP sobre la imagen */}
+              <span className="comentario-chip chip-dibujo">{item.comentario}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -369,29 +451,45 @@ function Dibujos({ volver }) {
   );
 }
 
+
 // =================== MENSAJE FINAL ===================
 
 function MensajeFinal({ volver }) {
-  const mensajeCompleto =
-    "Bueno mi mami linda, esta página la hice con todo mi cariño para ti, pensando cada detalle y\n" +
-    "algunos de los tantos momentos que hemos compartido juntos.\n\n" +
-
-    "Nuestro primer año juntitos como pareja fue increible, lleno de momentos lindos como tambien tuvimos algunos bad pero siempre juntitos\n" +
-    "apoyándonos mutuamente.\n\n" +
-
-    "Este es el primero de muchos años que estaremos juntitos, corazón mío.\n\n" +
-
-    "Si Dios quiere, el otro año nos veremos en persona y podremos hacer muchos recuerdos que serán inolvidables,\n" +
-    "momentos que recordaremos por siempre, morcita mía.\n\n" +
-
-    "Te amo demasiado corazón como nunca he amado a nadie. Eres el amor de mi vida y alma mi mujer preciosa 💖";
+  const paragraphs = [
+    "Bueno mi mami linda, esta página la hice con todo mi amor para ti, pensando cada detalle y algunos de los tantos momentos que hemos compartido juntos 👉👈.",
+    "Nuestro primer año juntitos como pareja fue increíble, lleno de momentos hermosos como también tuvimos algunos de bajon pero siempre juntitos apoyándonos mutuamente 💞.",
+    "Este es el primero de muchos años que estaremos juntitos corazon mio apoyandonos en las buenas y no tan buenas 🫂.",
+    "Si Dios quiere, el otro año nos veremos en persona y podremos hacer muchos recuerdos que serán inolvidables, momentos que recordaremos por siempre, morcita mía ✈️.",
+    "Te amo demasiado corazón como nunca he amado a nadie eres el amor de mi vida y alma, mi mujer preciosa espero el dia que se acabe esta distancia y podamos formar una vida juntitos para toda la vida mi amor 💖."
+  ];
 
   return (
     <div className="mensaje-final fade-in">
-      <h2>💌 Mi mensaje para ti</h2>
-      <pre className="mensaje-texto">{mensajeCompleto}</pre>
+      {/* Header con el mismo estilo de Historia */}
+      <header className="historia-header">
+      
+        <h2 className="historia-title">
+          <span>Mi mensaje</span> <em>para ti</em>
+        </h2>
+        <p className="historia-subtitle">De mí, con todo mi amor</p>
+        <i className="historia-underline" aria-hidden="true" />
+      </header>
 
-      <img src={`${process.env.PUBLIC_URL}/final.gif`} alt="gif romántico" className="gif-final" />
+      {/* Tarjeta con párrafos */}
+      <div className="historia-card">
+        {paragraphs.map((t, i) => (
+          <p key={i} className="historia-texto">{t}</p>
+        ))}
+      </div>
+
+      {/* Imagen/GIF enmarcado igual que en Historia */}
+      <figure className="historia-figure">
+        <img
+          src={`${process.env.PUBLIC_URL}/final.gif`}
+          alt="gif romántico"
+          className="gif-final"
+        />
+      </figure>
 
       <button className="boton-volver" onClick={volver}>← Volver</button>
     </div>
