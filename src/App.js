@@ -135,7 +135,7 @@ function App() {
           <div className="login-badge">💖 Aniversario</div>
 
           <h2 className="title-login">
-            Ingresa nuestra fecha especial
+            Ingresa la fecha y año de nuestro dia
           </h2>
 
           <p className="subtitle-login">
@@ -346,7 +346,7 @@ function Momentos({ volver }) {
     { src: 'foto15.png', comentario: 'Besito de payasos' },
     { src: 'foto16.png', comentario: 'No se porque pero me gusta esta foto' },
     { src: 'foto17.png', comentario: 'Un collage nuestro' },
-    { src: 'foto18.png', comentario: 'Y si nos casamos?' },
+    { src: 'foto18.png', comentario: 'Y si nos casamos asi?' },
     { src: 'foto19.png', comentario: 'Besito casados' },
     { src: 'foto20.png', comentario: 'De nuestros inicios solitos' },
     { src: 'foto21.png', comentario: 'Ya nos dabamos love' },
